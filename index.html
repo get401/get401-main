@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>get401 - Modern Authentication Platform</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=SF+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-brand">get<span>401</span></div>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
+        <button class="nav-button" onclick="openModal()">Get Started</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Enterprise-Grade <span class="highlight">Authentication</span> in 3
+                    Lines of Code
+                </h1>
+                <p>
+                    Copy-paste integration that works with React, Next.js, Vue, Node.js
+                    and more. No configuration hell. No vendor lock-in. Just secure,
+                    simple auth.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="openModal()">
+                        Start Free
+                    </button>
+                    <button class="btn-secondary btn-disabled" disabled title="Coming soon">
+                        Read Docs
+                    </button>
+                </div>
+            </div>
+            <div class="code-snippet">
+                <div class="code-header">
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchCode('react')">
+                            React
+                        </button>
+                        <button class="code-tab code-tab-disabled" disabled>
+                            Next.js
+                        </button>
+                        <button class="code-tab code-tab-disabled" disabled>Vue</button>
+                        <button class="code-tab code-tab-disabled" disabled>
+                            Node.js
+                        </button>
+                    </div>
+                    <button class="copy-btn" onclick="copyCode()">📋 Copy</button>
+                </div>
+
+                <div class="code-content">
+                    <pre id="codeBlock"><code id="react" class="code-block active">
+<span class="code-keyword">import</span> { Get401Provider } <span class="code-keyword">from</span> <span class="code-string">'@get401/react'</span>;
+<span class="code-keyword">import</span> { createRoot } <span class="code-keyword">from</span> <span class="code-string">'react-dom/client'</span>;
+
+<span class="code-function">createRoot</span>(document.<span class="code-method">getElementById</span>(<span class="code-string">'root'</span>)).<span class="code-method">render</span>(
+  &lt;<span class="code-tag">Get401Provider</span>
+    domain={<span class="code-string">'your-domain.get401.com'</span>}
+    clientId={<span class="code-string">'your_client_id'</span>}
+    redirectUri={<span class="code-string">'http://localhost:3000'</span>}
+  &gt;
+    &lt;<span class="code-tag">App</span> /&gt;
+  &lt;/<span class="code-tag">Get401Provider</span>&gt;
+);
+                    </code></pre>
+
+                    <pre id="next" class="code-block" style="display: none"><code>
+<span class="code-comment">// app.tsx</span>
+<span class="code-keyword">import</span> { Get401 } <span class="code-keyword">from</span> <span class="code-string">'@get401/next'</span>;
+
+<span class="code-keyword">export</span> <span class="code-keyword">default</span> <span class="code-keyword">function</span> <span class="code-function">RootLayout</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-tag">Get401</span>&gt;
+      &lt;<span class="code-tag">html</span>&gt;
+        &lt;<span class="code-tag">body</span>&gt;{children}&lt;/<span class="code-tag">body</span>&gt;
+      &lt;/<span class="code-tag">html</span>&gt;
+    &lt;/<span class="code-tag">Get401</span>&gt;
+  );
+}
+
+<span class="code-comment">// .env.local</span>
+GET401_DOMAIN=your-domain.get401.com
+GET401_CLIENT_ID=your_client_id
+GET401_SECRET=your_secret_key
+                    </code></pre>
+
+                    <pre id="vue" class="code-block" style="display: none"><code>
+<span class="code-comment">// main.ts</span>
+<span class="code-keyword">import</span> { createApp } <span class="code-keyword">from</span> <span class="code-string">'vue'</span>;
+<span class="code-keyword">import</span> { Get401Plugin } <span class="code-keyword">from</span> <span class="code-string">'@get401/vue'</span>;
+
+<span class="code-keyword">const</span> app = <span class="code-function">createApp</span>(App);
+
+app.<span class="code-method">use</span>(Get401Plugin, {
+  domain: <span class="code-string">'your-domain.get401.com'</span>,
+  clientId: <span class="code-string">'your_client_id'</span>,
+  redirectUri: <span class="code-string">'http://localhost:3000'</span>,
+});
+
+app.<span class="code-method">mount</span>(<span class="code-string">'#app'</span>);
+                    </code></pre>
+
+                    <pre id="node" class="code-block" style="display: none"><code>
+<span class="code-keyword">const</span> { Get401 } = <span class="code-function">require</span>(<span class="code-string">'@get401/sdk'</span>);
+
+<span class="code-keyword">const</span> get401 = <span class="code-keyword">new</span> <span class="code-function">Get401</span>({
+  domain: <span class="code-string">'your-domain.get401.com'</span>,
+  clientId: <span class="code-string">'your_client_id'</span>,
+  clientSecret: <span class="code-string">'your_secret'</span>,
+});
+
+<span class="code-comment">// Verify token</span>
+<span class="code-keyword">const</span> user = <span class="code-keyword">await</span> get401.<span class="code-method">verifyToken</span>(token);
+
+<span class="code-comment">// Get user info</span>
+<span class="code-keyword">const</span> profile = <span class="code-keyword">await</span> get401.<span class="code-method">getUserInfo</span>(userId);
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Why Teams Choose get401</h2>
+            <p>
+                Built for developers, trusted by enterprises. Fast, secure, and
+                infinitely flexible.
+            </p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Copy-Paste Setup</h3>
+                <p>
+                    Paste 3 lines of code. Done. No config files, no environment
+                    variables to juggle.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Enterprise Security</h3>
+                <p>
+                    SOC2, HIPAA, GDPR compliant. Bank-grade encryption with zero
+                    compromises.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>
+                    Sub-millisecond auth. Global CDN. One-click logins. Your users won't
+                    wait.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Works Everywhere</h3>
+                <p>
+                    React, Next.js, Vue, Svelte, Angular, Node.js, Python, Go. Native
+                    SDKs for all.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Social OAuth Built-In</h3>
+                <p>
+                    Google, GitHub, Microsoft, Apple. Support 20+ providers. No extra
+                    integration work.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-Time Analytics</h3>
+                <p>
+                    Track login attempts, failures, conversions. One dashboard. Zero
+                    complexity.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how">
+        <div class="section-header">
+            <h2>Simple Setup, Powerful Control</h2>
+            <p>Get running in minutes with our streamlined onboarding process.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Create Project</h3>
+                <p>
+                    Sign up and create your first project. Get your API keys in seconds.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Install SDK</h3>
+                <p>
+                    Add our lightweight SDK to your app. One npm install and you're
+                    ready to go.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Integrate Auth</h3>
+                <p>
+                    Drop our login component into your app. Customize colors, flows, and
+                    branding.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Go Live</h3>
+                <p>
+                    Test in sandbox, deploy to production. Monitor and scale with
+                    confidence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <h2>Be an Early Adopter</h2>
+            <p>Join the waiting list and get exclusive benefits when we launch.</p>
+        </div>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 16px;
+            ">
+                    <span style="font-size: 32px">⏰</span>
+                    <h3 style="margin: 0">Early Access</h3>
+                </div>
+                <p style="
+              color: var(--text-secondary);
+              font-size: 14px;
+              margin-bottom: 20px;
+            ">
+                    Be among the first to use get401 before the official launch
+                </p>
+                <ul class="pricing-features">
+                    <li>Private beta access</li>
+                    <li>Direct access to founders</li>
+                    <li>Shape the product roadmap</li>
+                    <li>Lifetime priority support</li>
+                </ul>
+                <button onclick="openModal()">Join Waitlist</button>
+            </div>
+            <div class="pricing-card featured">
+                <div style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 16px;
+            ">
+                    <span style="font-size: 32px">🎁</span>
+                    <h3 style="margin: 0">Founder Tier</h3>
+                </div>
+                <p style="
+              color: var(--text-secondary);
+              font-size: 14px;
+              margin-bottom: 20px;
+            ">
+                    First 100 signups get lifetime special pricing
+                </p>
+                <ul class="pricing-features">
+                    <li>50% lifetime discount</li>
+                    <li>Unlimited everything for 6 months</li>
+                    <li>Custom integration support</li>
+                    <li>Founders community access</li>
+                    <li>Annual strategy calls</li>
+                </ul>
+                <button onclick="openModal()">Claim Your Spot</button>
+            </div>
+            <div class="pricing-card">
+                <div style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 16px;
+            ">
+                    <span style="font-size: 32px">🚀</span>
+                    <h3 style="margin: 0">Launch Week</h3>
+                </div>
+                <p style="
+              color: var(--text-secondary);
+              font-size: 14px;
+              margin-bottom: 20px;
+            ">
+                    Coming Q2 2026 with features you've requested
+                </p>
+                <ul class="pricing-features">
+                    <li>All basic features included</li>
+                    <li>Free tier for up to 10k users</li>
+                    <li>Community Slack access</li>
+                    <li>Weekly product updates</li>
+                </ul>
+                <button onclick="openModal()">Get Notified</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="integration-examples">
+        <div class="section-header">
+            <h2>Works With Your Stack</h2>
+            <p>
+                Drop-in SDKs for every language and framework. Same powerful API
+                everywhere.
+            </p>
+        </div>
+
+        <div class="integration-tabs">
+            <button class="integration-tab active" onclick="switchIntegration('login')">
+                Login Button
+            </button>
+            <button class="integration-tab" onclick="switchIntegration('protect')">
+                Protected Routes
+            </button>
+            <button class="integration-tab" onclick="switchIntegration('api')">
+                API Protection
+            </button>
+        </div>
+
+        <div class="integration-content">
+            <div id="login" class="integration-block active">
+                <div class="integration-code">
+                    <pre><code><span class="code-keyword">import</span> { useAuth } <span class="code-keyword">from</span> <span class="code-string">'@get401/react'</span>;
+
+<span class="code-keyword">export</span> <span class="code-keyword">function</span> <span class="code-function">LoginButton</span>() {
+  <span class="code-keyword">const</span> { login, user } = <span class="code-function">useAuth</span>();
+
+  <span class="code-keyword">return</span> user ? (
+    &lt;&gt;
+      &lt;<span class="code-tag">span</span>&gt;Welcome, {user.name}!&lt;/<span class="code-tag">span</span>&gt;
+    &lt;/&gt;
+  ) : (
+    &lt;<span class="code-tag">button</span> onClick={() =&gt; <span class="code-function">login</span>()}&gt;
+      Login with get401
+    &lt;/<span class="code-tag">button</span>&gt;
+  );
+}</code></pre>
+                </div>
+                <div class="integration-desc">
+                    <h4>Add Login in Seconds</h4>
+                    <p>
+                        Drop our hook into any component. Handles OAuth, passwords, magic
+                        links, passkeys—all of it.
+                    </p>
+                    <ul style="
+                margin-top: 16px;
+                list-style: none;
+                color: var(--text-secondary);
+                font-size: 14px;
+              ">
+                        <li style="padding: 8px 0">✓ Zero configuration</li>
+                        <li style="padding: 8px 0">✓ Works offline</li>
+                        <li style="padding: 8px 0">✓ Auto-refresh tokens</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="protect" class="integration-block" style="display: none">
+                <div class="integration-code">
+                    <pre><code><span class="code-keyword">function</span> <span class="code-function">ProtectedRoute</span>({ children }) {
+  <span class="code-keyword">const</span> { user, isLoading } = <span class="code-function">useAuth</span>();
+
+  <span class="code-keyword">if</span> (isLoading) <span class="code-keyword">return</span> &lt;<span class="code-tag">div</span>&gt;Loading...&lt;/<span class="code-tag">div</span>&gt;;
+  
+  <span class="code-keyword">if</span> (!user) {
+    <span class="code-keyword">return</span> &lt;<span class="code-tag">Navigate</span> to=<span class="code-string">"/login"</span> /&gt;;
+  }
+
+  <span class="code-keyword">return</span> children;
+}
+
+<span class="code-comment">// Usage</span>
+&lt;<span class="code-tag">Route</span> 
+  path=<span class="code-string">"/dashboard"</span> 
+  element={&lt;<span class="code-tag">ProtectedRoute</span>&gt;&lt;<span class="code-tag">Dashboard</span> /&gt;&lt;/<span class="code-tag">ProtectedRoute</span>&gt;} 
+/&gt;</code></pre>
+                </div>
+                <div class="integration-desc">
+                    <h4>Secure Your Routes</h4>
+                    <p>
+                        Protect any route in your app. Automatically redirects
+                        unauthenticated users to login.
+                    </p>
+                    <ul style="
+                margin-top: 16px;
+                list-style: none;
+                color: var(--text-secondary);
+                font-size: 14px;
+              ">
+                        <li style="padding: 8px 0">✓ Role-based access</li>
+                        <li style="padding: 8px 0">✓ Permission checks</li>
+                        <li style="padding: 8px 0">✓ Custom logic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="api" class="integration-block" style="display: none">
+                <div class="integration-code">
+                    <pre><code><span class="code-keyword">const</span> { verifyToken } = <span class="code-function">require</span>(<span class="code-string">'@get401/sdk'</span>);
+
+<span class="code-comment">// Express middleware</span>
+<span class="code-keyword">async</span> <span class="code-keyword">function</span> <span class="code-function">authMiddleware</span>(req, res, next) {
+  <span class="code-keyword">try</span> {
+    <span class="code-keyword">const</span> token = req.headers.authorization;
+    <span class="code-keyword">const</span> user = <span class="code-keyword">await</span> <span class="code-function">verifyToken</span>(token);
+    req.user = user;
+    <span class="code-function">next</span>();
+  } <span class="code-keyword">catch</span> (err) {
+    res.<span class="code-function">status</span>(401).<span class="code-function">send</span>(<span class="code-string">'Unauthorized'</span>);
+  }
+}
+
+app.<span class="code-function">get</span>(<span class="code-string">'/api/profile'</span>, authMiddleware, (req, res) =&gt; {
+  res.<span class="code-function">json</span>(req.user);
+});</code></pre>
+                </div>
+                <div class="integration-desc">
+                    <h4>Protect Your APIs</h4>
+                    <p>
+                        Verify tokens on your backend in one line. Works with any
+                        framework.
+                    </p>
+                    <ul style="
+                margin-top: 16px;
+                list-style: none;
+                color: var(--text-secondary);
+                font-size: 14px;
+              ">
+                        <li style="padding: 8px 0">✓ JWT verification</li>
+                        <li style="padding: 8px 0">✓ Scope checking</li>
+                        <li style="padding: 8px 0">✓ Caching</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Ship Auth?</h2>
+            <p>
+                Stop fighting with authentication. Get secure, production-ready login
+                in minutes. Join developers building on get401.
+            </p>
+            <button class="btn-primary" style="display: inline-block; margin-top: 16px" onclick="openModal()">
+                Join 500+ Early Adopters →
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Discord</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 get401. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+
+            <div id="formContent">
+                <h2>Pre-register with get401</h2>
+                <p>
+                    Join developers building secure applications. No credit card
+                    required.
+                </p>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="email">Email Address <span>*</span></label>
+                        <input type="email" id="email" placeholder="you@company.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Full Name <span>*</span></label>
+                        <input type="text" id="name" placeholder="John Doe" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" placeholder="Your Company" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role <span>*</span></label>
+                        <select id="role" required>
+                            <option value="">Select your role</option>
+                            <option value="founder">Founder</option>
+                            <option value="developer">Developer</option>
+                            <option value="manager">Manager</option>
+                            <option value="cto">CTO / Tech Lead</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="submitBtn">Pre-register Now</button>
+                    <p class="form-disclaimer">
+                        By signing up, you agree to our
+                        <a href="#">Terms of Service</a> and
+                        <a href="#">Privacy Policy</a>.
+                    </p>
+                </form>
+            </div>
+
+            <div id="successMessage" class="form-success">
+                <h3>✓ Success!</h3>
+                <p>Check your email for next steps.<br />Welcome to get401!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/telegram.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/code-switcher.js"></script>
+    <script src="js/integration.js"></script>
+</body>
+
+</html>
