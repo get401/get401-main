@@ -32,13 +32,13 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/${{ secrets.USERNAME }}/projects/get401-main/.devops
+            cd /home/${{ secrets.USERNAME }}/projects/get401-main/
             
             # Stop/Remove old container
             docker stop get401-main || true
             docker rm get401-main || true
             
-            docker build -t get401-main .
+            docker build -f .devops/Dockerfile -t get401-main .
             
             # Run new container
             docker run -d \
