@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/${{ secrets.USERNAME }}/projects/get401-main
+            cd /home/${{ secrets.USERNAME }}/projects/get401-main/.devops
             
             # Stop/Remove old container
             docker stop get401-main || true
