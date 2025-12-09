@@ -20,7 +20,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "."
+          source: ".,.devops"
           target: "/home/${{ secrets.USERNAME }}/projects/get401-main"
           rm: true # Clean target folder before copy
 
