@@ -1,0 +1,47 @@
+name: Deploy Light Proxy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Copy ALL repo files to VPS (Uses rsync/scp)
+      # We exclude .git here too to save bandwidth during transfer
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "."
+          target: "/home/${{ secrets.USERNAME }}/projects/get401-main"
+          rm: true # Clean target folder before copy
+
+      # 2. Build and Run on Server
+      - name: Remote Docker Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/${{ secrets.USERNAME }}/projects/get401-main
+            
+            # Stop/Remove old container
+            docker stop get401-main || true
+            docker rm get401-main || true
+            
+            docker build -t get401-main ../.
+            
+            # Run new container
+            docker run -d \
+              --name get401-main \
+              --restart unless-stopped \
+              -p 8090:8080 \
+              get401-main
