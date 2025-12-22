@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script type="text/javascript">
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -27,8 +28,13 @@
   </head>
 
   <body>
+    <!-- Navigation -->
     <nav>
-      <div class="nav-brand">get<span>401</span></div>
+      <div class="nav-brand">
+        <a href="#hero">
+          <img src="logo.png" alt="get401" class="nav-logo" />
+        </a>
+      </div>
       <ul>
         <li><a href="#features">Features</a></li>
         <li><a href="#how">How it works</a></li>
@@ -37,7 +43,8 @@
       <button class="nav-button" onclick="openModal()">Get Started</button>
     </nav>
 
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
       <div class="hero-content">
         <div class="hero-text">
           <h1>
@@ -62,6 +69,7 @@
             </button>
           </div>
         </div>
+
         <div class="code-snippet">
           <div class="code-header">
             <div class="code-tabs">
@@ -76,7 +84,10 @@
                 Node.js
               </button>
             </div>
-            <button class="copy-btn" onclick="copyCode()">📋 Copy</button>
+            <button class="copy-btn" onclick="copyCode()">
+              <i data-lucide="copy" style="width: 16px; height: 16px"></i>
+              Copy
+            </button>
           </div>
 
           <div class="code-content">
@@ -93,7 +104,7 @@
     &lt;<span class="code-tag">App</span> /&gt;
   &lt;/<span class="code-tag">Get401Provider</span>&gt;
 );
-                    </code></pre>
+            </code></pre>
 
             <pre id="next" class="code-block" style="display: none"><code>
 <span class="code-comment">// app.tsx</span>
@@ -113,7 +124,7 @@
 GET401_DOMAIN=your-domain.get401.com
 GET401_CLIENT_ID=your_client_id
 GET401_SECRET=your_secret_key
-                    </code></pre>
+            </code></pre>
 
             <pre id="vue" class="code-block" style="display: none"><code>
 <span class="code-comment">// main.ts</span>
@@ -129,7 +140,7 @@ app.<span class="code-method">use</span>(Get401Plugin, {
 });
 
 app.<span class="code-method">mount</span>(<span class="code-string">'#app'</span>);
-                    </code></pre>
+            </code></pre>
 
             <pre id="node" class="code-block" style="display: none"><code>
 <span class="code-keyword">const</span> { Get401 } = <span class="code-function">require</span>(<span class="code-string">'@get401/sdk'</span>);
@@ -145,11 +156,54 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
 
 <span class="code-comment">// Get user info</span>
 <span class="code-keyword">const</span> profile = <span class="code-keyword">await</span> get401.<span class="code-method">getUserInfo</span>(userId);
-                    </code></pre>
+            </code></pre>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="about-container">
+        <div class="about-header">
+          <h2>Built by Developers, for Developers</h2>
+          <p>
+            While enterprise auth platforms focus on authentication and
+            compliance, we provide a complete user management layer: user data,
+            roles, permissions, states, workflows, and administration - ready to
+            use without building everything around auth.
+          </p>
+        </div>
+
+        <div class="about-cards">
+          <div class="about-card">
+            <div class="card-icon">
+              <i data-lucide="zap"></i>
+            </div>
+            <h3>Ship Faster</h3>
+            <p>3 lines of code. That's it.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <h3>Enterprise Security</h3>
+            <p>SOC2, HIPAA, GDPR ready.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-icon">
+              <i data-lucide="message-circle"></i>
+            </div>
+            <h3>Always Here</h3>
+            <p>Talk to real humans, anytime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
     <section class="features" id="features">
       <div class="section-header">
         <h2>Why Teams Choose get401</h2>
@@ -160,47 +214,64 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
       </div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">⚙️</div>
+          <div class="feature-icon">
+            <i data-lucide="settings"></i>
+          </div>
           <h3>Copy-Paste Setup</h3>
           <p>
             Paste 3 lines of code. Done. No config files, no environment
             variables to juggle.
           </p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">🔐</div>
+          <div class="feature-icon">
+            <i data-lucide="lock"></i>
+          </div>
           <h3>Enterprise Security</h3>
           <p>
             SOC2, HIPAA, GDPR compliant. Bank-grade encryption with zero
             compromises.
           </p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">⚡</div>
+          <div class="feature-icon">
+            <i data-lucide="zap"></i>
+          </div>
           <h3>Lightning Fast</h3>
           <p>
             Sub-millisecond auth. Global CDN. One-click logins. Your users won't
             wait.
           </p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">🔧</div>
+          <div class="feature-icon">
+            <i data-lucide="wrench"></i>
+          </div>
           <h3>Works Everywhere</h3>
           <p>
             React, Next.js, Vue, Svelte, Angular, Node.js, Python, Go. Native
             SDKs for all.
           </p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">🌐</div>
+          <div class="feature-icon">
+            <i data-lucide="globe"></i>
+          </div>
           <h3>Social OAuth Built-In</h3>
           <p>
             Google, GitHub, Microsoft, Apple. Support 20+ providers. No extra
             integration work.
           </p>
         </div>
+
         <div class="feature-card">
-          <div class="feature-icon">📊</div>
+          <div class="feature-icon">
+            <i data-lucide="bar-chart-3"></i>
+          </div>
           <h3>Real-Time Analytics</h3>
           <p>
             Track login attempts, failures, conversions. One dashboard. Zero
@@ -210,6 +281,7 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
       </div>
     </section>
 
+    <!-- How It Works Section -->
     <section class="how-it-works" id="how">
       <div class="section-header">
         <h2>Simple Setup, Powerful Control</h2>
@@ -250,6 +322,7 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
       </div>
     </section>
 
+    <!-- Pricing Section -->
     <section class="pricing" id="pricing">
       <div class="section-header">
         <h2>Be an Early Adopter</h2>
@@ -257,24 +330,11 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
       </div>
       <div class="pricing-cards">
         <div class="pricing-card">
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              margin-bottom: 16px;
-            "
-          >
-            <span style="font-size: 32px">⏰</span>
-            <h3 style="margin: 0">Early Access</h3>
+          <div class="pricing-card-header">
+            <i data-lucide="clock" class="pricing-icon"></i>
+            <h3>Early Access</h3>
           </div>
-          <p
-            style="
-              color: var(--text-secondary);
-              font-size: 14px;
-              margin-bottom: 20px;
-            "
-          >
+          <p class="pricing-description">
             Be among the first to use get401 before the official launch
           </p>
           <ul class="pricing-features">
@@ -285,25 +345,13 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
           </ul>
           <button onclick="openModal()">Join Waitlist</button>
         </div>
+
         <div class="pricing-card featured">
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              margin-bottom: 16px;
-            "
-          >
-            <span style="font-size: 32px">🎁</span>
-            <h3 style="margin: 0">Founder Tier</h3>
+          <div class="pricing-card-header">
+            <i data-lucide="gift" class="pricing-icon"></i>
+            <h3>Founder Tier</h3>
           </div>
-          <p
-            style="
-              color: var(--text-secondary);
-              font-size: 14px;
-              margin-bottom: 20px;
-            "
-          >
+          <p class="pricing-description">
             First 100 signups get lifetime special pricing
           </p>
           <ul class="pricing-features">
@@ -315,25 +363,13 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
           </ul>
           <button onclick="openModal()">Claim Your Spot</button>
         </div>
+
         <div class="pricing-card">
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              margin-bottom: 16px;
-            "
-          >
-            <span style="font-size: 32px">🚀</span>
-            <h3 style="margin: 0">Launch Week</h3>
+          <div class="pricing-card-header">
+            <i data-lucide="rocket" class="pricing-icon"></i>
+            <h3>Launch Week</h3>
           </div>
-          <p
-            style="
-              color: var(--text-secondary);
-              font-size: 14px;
-              margin-bottom: 20px;
-            "
-          >
+          <p class="pricing-description">
             Coming Q2 2026 with features you've requested
           </p>
           <ul class="pricing-features">
@@ -347,6 +383,7 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
       </div>
     </section>
 
+    <!-- Integration Examples Section -->
     <section class="integration-examples">
       <div class="section-header">
         <h2>Works With Your Stack</h2>
@@ -396,17 +433,10 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
               Drop our hook into any component. Handles OAuth, passwords, magic
               links, passkeys—all of it.
             </p>
-            <ul
-              style="
-                margin-top: 16px;
-                list-style: none;
-                color: var(--text-secondary);
-                font-size: 14px;
-              "
-            >
-              <li style="padding: 8px 0">✓ Zero configuration</li>
-              <li style="padding: 8px 0">✓ Works offline</li>
-              <li style="padding: 8px 0">✓ Auto-refresh tokens</li>
+            <ul class="integration-features">
+              <li>✓ Zero configuration</li>
+              <li>✓ Works offline</li>
+              <li>✓ Auto-refresh tokens</li>
             </ul>
           </div>
         </div>
@@ -437,17 +467,10 @@ app.<span class="code-method">mount</span>(<span class="code-string">'#app'</spa
               Protect any route in your app. Automatically redirects
               unauthenticated users to login.
             </p>
-            <ul
-              style="
-                margin-top: 16px;
-                list-style: none;
-                color: var(--text-secondary);
-                font-size: 14px;
-              "
-            >
-              <li style="padding: 8px 0">✓ Role-based access</li>
-              <li style="padding: 8px 0">✓ Permission checks</li>
-              <li style="padding: 8px 0">✓ Custom logic</li>
+            <ul class="integration-features">
+              <li>✓ Role-based access</li>
+              <li>✓ Permission checks</li>
+              <li>✓ Custom logic</li>
             </ul>
           </div>
         </div>
@@ -478,23 +501,17 @@ app.<span class="code-function">get</span>(<span class="code-string">'/api/profi
               Verify tokens on your backend in one line. Works with any
               framework.
             </p>
-            <ul
-              style="
-                margin-top: 16px;
-                list-style: none;
-                color: var(--text-secondary);
-                font-size: 14px;
-              "
-            >
-              <li style="padding: 8px 0">✓ JWT verification</li>
-              <li style="padding: 8px 0">✓ Scope checking</li>
-              <li style="padding: 8px 0">✓ Caching</li>
+            <ul class="integration-features">
+              <li>✓ JWT verification</li>
+              <li>✓ Scope checking</li>
+              <li>✓ Caching</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CTA Section -->
     <section class="cta">
       <div class="cta-content">
         <h2>Ready to Ship Auth?</h2>
@@ -502,40 +519,37 @@ app.<span class="code-function">get</span>(<span class="code-string">'/api/profi
           Stop fighting with authentication. Get secure, production-ready login
           in minutes. Join developers building on get401.
         </p>
-        <button
-          class="btn-primary"
-          style="display: inline-block; margin-top: 16px"
-          onclick="openModal()"
-        >
+        <button class="btn-primary cta-button" onclick="openModal()">
           Join 500+ Early Adopters →
         </button>
       </div>
     </section>
 
+    <!-- Footer -->
     <footer>
       <div class="footer-content">
         <div class="footer-section">
           <h4>Product</h4>
-          <ul>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">API Reference</a></li>
-            <li><a href="#">Status</a></li>
+          <ul class="socials">
+            <li><a href="#" class="soon">Documentation</a></li>
+            <li><a href="#" class="soon">API Reference</a></li>
           </ul>
         </div>
         <div class="footer-section">
           <h4>Company</h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="mailto:support@get401.com">Contact</a></li>
+            <li>
+              <a class="soon" href="#" tabindex="-1">Blog <span>soon</span></a>
+            </li>
           </ul>
         </div>
         <div class="footer-section">
           <h4>Connect</h4>
-          <ul>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Discord</a></li>
+          <ul class="socials">
+            <li><a href="#" class="soon">Twitter</a></li>
+            <li><a href="#" class="soon">Discord</a></li>
           </ul>
         </div>
       </div>
@@ -544,6 +558,7 @@ app.<span class="code-function">get</span>(<span class="code-string">'/api/profi
       </div>
     </footer>
 
+    <!-- Modal -->
     <div class="modal" id="signupModal">
       <div class="modal-content">
         <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -600,10 +615,14 @@ app.<span class="code-function">get</span>(<span class="code-string">'/api/profi
       </div>
     </div>
 
+    <!-- Scripts -->
     <script src="js/main.js"></script>
     <script src="js/telegram.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/code-switcher.js"></script>
     <script src="js/integration.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>
