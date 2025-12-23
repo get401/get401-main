@@ -19,8 +19,13 @@ nav {
   cursor: pointer;
 }
 
+.nav-brand a {
+  text-decoration: none;
+  display: block;
+}
+
 .nav-logo {
-  height: 32px;
+  height: 60px;
   width: auto;
   display: block;
   transition: transform 0.3s ease;
@@ -38,16 +43,85 @@ nav ul {
   margin-left: 60px;
 }
 
-nav a {
+nav ul li {
+  position: relative;
+}
+
+nav ul a {
   text-decoration: none;
   color: var(--text-secondary);
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 8px 12px;
+  display: block;
+  border-radius: 6px;
 }
 
-nav a:hover {
+/* Точка-индикатор сверху */
+nav ul a::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+
+/* Подсветка фона */
+nav ul a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+nav ul a:hover {
   color: var(--primary-purple);
+}
+
+nav ul a:hover::before {
+  transform: translateX(-50%) scale(1);
+}
+
+nav ul a:hover::after {
+  opacity: 1;
+}
+
+nav ul a.active {
+  color: var(--primary-purple);
+  font-weight: 600;
+}
+
+nav ul a.active::before {
+  transform: translateX(-50%) scale(1);
+  animation: dotPulse 2s infinite;
+}
+
+nav ul a.active::after {
+  opacity: 1;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.8);
+  }
 }
 
 .nav-button {
@@ -68,7 +142,6 @@ nav a:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(124, 58, 237, 0.2);
 }
-
 /* ===== HERO SECTION ===== */
 .hero {
   padding: 120px 5%;
@@ -236,7 +309,7 @@ nav a:hover {
 
 .code-tabs {
   display: flex;
-  gap: 4px;
+  gap: 10px;
 }
 
 .code-tab {
@@ -247,7 +320,8 @@ nav a:hover {
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid white;
   transition: all 0.3s ease;
   font-family: "Inter", sans-serif;
 }
@@ -916,7 +990,7 @@ footer {
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 16px;
-  color: var(--primary-purple);
+  color: white;
 }
 
 .footer-section ul {
